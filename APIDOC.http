@@ -1,0 +1,13 @@
+# api call for category list
+
+###
+GET  http://127.0.0.1:8000/api/category/
+
+# api call for adding category
+###
+POST http://127.0.0.1:8000/api/category/
+Content-Type: application/json
+
+{
+    "name":"fruits"
+}

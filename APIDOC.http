@@ -11,3 +11,39 @@ Content-Type: application/json
 {
     "name":"fruits"
 }
+
+
+# ======product manage=====
+
+#api call for adding a new product
+
+###
+
+POST http://127.0.0.1:8000/api/category/1/products/
+Content-Type: application/json
+
+{
+    "title":"potatto",
+    "description":"potatto description",
+    "price":65
+
+}
+
+# api call listing all products
+
+###
+
+POST http://127.0.0.1:8000/api/products
+Content-Type: application/json
+
+{
+    "title":"carrot",
+    "description":"carrot description",
+    "price":75
+
+}
+
+# specific product detail
+###
+GET http://127.0.0.1:8000/api/products?category=vegitable
+# ? optional query parameter

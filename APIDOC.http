@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8000/api/products
+POST http://127.0.0.1:8000/api/products/
 Content-Type: application/json
 
 {
@@ -45,5 +45,40 @@ Content-Type: application/json
 
 # specific product detail
 ###
-GET http://127.0.0.1:8000/api/products?category=vegitable
+GET http://127.0.0.1:8000/api/products/
 # ? optional query parameter
+
+
+# Api call for creating order
+###
+POST http://127.0.0.1:8000/api/orders/
+Content-Type: application/json
+
+{
+    "phone":"9526562826"
+}
+
+# Api call for adding order item to a order
+###
+
+POST  http://127.0.0.1:8000/api/orders/1/items/
+Content-Type: application/json
+
+{
+    "product_object":1,
+    "qty":1
+
+}
+
+
+# api for order detail view
+###
+GET  http://127.0.0.1:8000/api/orders/1/
+
+
+
+# Api for generating bill
+
+###
+
+PUT http://127.0.0.1:8000/api/orders/1/generate-bill/

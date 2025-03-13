@@ -16,6 +16,11 @@ urlpatterns=[
 
     path("category/<int:pk>/products/",views.ProductCreateView.as_view()),
 
+    path("orders/",views.OrderCreateView.as_view()),
+
+    path("orders/<int:pk>/items/",views.OrderItemCreateView.as_view()),
+
+    path("orders/<int:pk>/",views.OrderRetrieveView.as_view()),
 
 
 ]+router.urls

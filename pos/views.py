@@ -1,11 +1,12 @@
 from django.shortcuts import render,get_object_or_404
 
 
+from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet,ModelViewSet
-from pos.models import Category,Product
-from pos.serializers import CategorySerializer,ProductSerializer
+from pos.models import Category,Product,Order
+from pos.serializers import CategorySerializer,ProductSerializer,OrderSerializer,OrderItemSerializer
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView,RetrieveAPIView
 
 class CategoryViewSet(ViewSet):
 
@@ -109,10 +110,47 @@ class ProductViewSetView(ModelViewSet):
         # request.query_params={"category":"vegitable"}
 
         if "category" in self.request.query_params:
+            
             category_name=self.request.query_params.get("category")
 
             qs=qs.filter(category_object__name=category_name)
         
         return qs
+    
 
-   
+
+class OrderCreateView(CreateAPIView):
+
+    serializer_class=OrderSerializer
+
+
+
+class OrderItemCreateView(CreateAPIView):
+
+    serializer_class=OrderItemSerializer
+
+    def perform_create(self, serializer):
+
+        print(self.request.data)
+        
+        id=self.kwargs.get("pk")
+
+        order_instance=get_object_or_404(Order,id=id)
+
+        product_instance=get_object_or_404(Product,id=self.request.data.get("product_object"))
+
+
+        serializer.save(order_object=order_instance,product_object=product_instance)
+
+
+class OrderRetrieveView(RetrieveAPIView):
+
+
+   queryset=Order.objects.all()
+
+   serializer_class=OrderSerializer
+
+
+
+# generateBill
+# ulr:
